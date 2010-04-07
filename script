@@ -1,0 +1,1000 @@
+    self.acoes.append (tipo, tempo)
+    ^
+IndentationError: unexpected indent
+>>> import gen
+>>> a(gen.Processo('a', [['io', 2]]), gen.Processo('b', [['io', 1]]))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: __init__() takes exactly 2 arguments (3 given)
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...         self.nome = nome
+...         self.acoes = acoes
+... 
+>>>     def nova_acao(self, tipo, tempo):
+  File "<stdin>", line 1
+    def nova_acao(self, tipo, tempo):
+    ^
+IndentationError: unexpected indent
+>>>         self.acoes.append (tipo, tempo)
+  File "<stdin>", line 1
+    self.acoes.append (tipo, tempo)
+    ^
+IndentationError: unexpected indent
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...         self.nome = nome
+...         self.acoes = acoes
+... 
+>>>     def nova_acao(self, tipo, tempo):
+  File "<stdin>", line 1
+    def nova_acao(self, tipo, tempo):
+    ^
+IndentationError: unexpected indent
+>>>         self.acoes.append (tipo, tempo)
+  File "<stdin>", line 1
+    self.acoes.append (tipo, tempo)
+    ^
+IndentationError: unexpected indent
+>>> class Bag:
+...     def __init__(self):
+...         self.data = []
+...     def add(self, x):
+...         self.data.append(x)
+...     def addtwice(self, x):
+...         self.add(x)
+...         self.add(x)
+... 
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...         self.nome = nome
+...         self.acoes = acoes
+...     def nova_acao(self, tipo, tempo):
+...         self.acoes.append(tipo, tempo)
+... 
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...         self.nome = nome
+...         self.acoes = acoes
+... 
+>>>     def nova_acao(self, tipo, tempo):
+  File "<stdin>", line 1
+    def nova_acao(self, tipo, tempo):
+    ^
+IndentationError: unexpected indent
+>>>         self.acoes.append(tipo, tempo)
+  File "<stdin>", line 1
+    self.acoes.append(tipo, tempo)
+    ^
+IndentationError: unexpected indent
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...         self.nome = nome
+...         self.acoes = acoes
+...     def nova_acao(self, tipo, tempo):
+...         self.acoes.append(tipo, tempo)
+...  
+>>> a = Processo('a')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: __init__() takes exactly 3 arguments (2 given)
+>>> a = Processo('a', [])
+>>> a.nova_acao('rsrs', 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 6, in nova_acao
+TypeError: append() takes exactly one argument (2 given)
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...         self.nome = nome
+...         self.acoes = acoes
+...     def nova_acao(self, tipo, tempo):
+...         self.acoes.append((tipo, tempo))
+... 
+>>> a.nova_acao('rsrs', 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 6, in nova_acao
+TypeError: append() takes exactly one argument (2 given)
+>>> a = Processo('a', [])
+>>> a.nova_acao('rsrs', 1)
+>>> a
+<__main__.Processo instance at 0xb75d322c>
+>>> a.acoes
+[('rsrs', 1)]
+>>> a.nova_acao('wait', 1)
+>>> a
+<__main__.Processo instance at 0xb75d322c>
+>>> import gen
+>>> a = Processo('a', [('rsrs', 1), ('wait', 1)]
+... 
+... )
+>>> a = Processo('a', [('rsrs', 1), ('wait', 1)]
+... 
+... 
+... )
+>>> a = Processo('a', [('rsrs', 1), ('wait', 1)])
+>>> b = Processo('b', [('rsrs', 10), ('wait', 6)])
+>>> 
+>>> executar(escalonador_fifo, [a; b])
+  File "<stdin>", line 1
+    executar(escalonador_fifo, [a; b])
+                                 ^
+SyntaxError: invalid syntax
+>>> executar(escalonador_fifo, [a, b])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'executar' is not defined
+>>> gen.executar(gen.escalonador_fifo, [a, b])
+Processo a fica rsrs por 1 segundos
+Processo b fica rsrs por 10 segundos
+Processo a fica wait por 1 segundos
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 39, in executar
+    def executar(escalonador, processos):
+  File "gen.py", line 34, in passo
+    print "Processo finalizado: %s" % nome
+IndexError: pop from empty list
+>>> import gen
+>>> gen.executar(gen.escalonador_fifo, [a, b])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 38, in executar
+    tempo = acao.pop(0)
+  File "gen.py", line 19, in escalonador_fifo
+    proximo = prontos.pop(0)
+IndexError: pop from empty list
+>>> print [1, 2]
+[1, 2]
+>>> gen.executar(gen.escalonador_fifo, [a, b])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 38, in executar
+    print 'err'
+  File "gen.py", line 19, in escalonador_fifo
+    print "Debug: %s" % prontos
+IndexError: pop from empty list
+>>> import gen
+>>> gen.executar(gen.escalonador_fifo, [a, b])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 38, in executar
+    print 'err'
+  File "gen.py", line 19, in escalonador_fifo
+    print "Debug: %s" % prontos
+IndexError: pop from empty list
+>>> a
+<__main__.Processo instance at 0xb75d328c>
+>>> a.list
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: Processo instance has no attribute 'list'
+>>> a = Processo('a', [('rsrs', 1), ('wait', 1)])
+>>> b = Processo('b', [('rsrs', 10), ('wait', 6)])
+>>> gen.executar(gen.escalonador_fifo, [a, b])
+Processo a fica rsrs por 1 segundos
+Processo b fica rsrs por 10 segundos
+Processo a fica wait por 1 segundos
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 39, in executar
+    else:
+  File "gen.py", line 34, in passo
+    tipo = acao.pop(0)
+IndexError: pop from empty list
+>>> print "Debug: %s" % [1, 2]
+Debug: [1, 2]
+>>> def counter ():
+...     i = 0
+...     while i < maximum:
+...         print 'debug'
+...         yield i
+...         i += 1
+... 
+>>> def counter(max):
+...     i = 0
+...     while i < max:
+...         print 'debug'
+...         yield i
+...         i += 1
+... 
+>>> counter(10)
+<generator object at 0xb75d348c>
+>>> counter(10)
+<generator object at 0xb75d360c>
+>>> a = counter(10)
+>>> a()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'generator' object is not callable
+>>> a.next()
+debug
+0
+>>> a.next()
+debug
+1
+>>> a.next()
+debug
+2
+>>> a.next()
+debug
+3
+>>> a.next()
+debug
+4
+>>> a.next()
+debug
+5
+>>> a.next()
+debug
+6
+>>> a.next()
+debug
+7
+>>> a.next()
+debug
+8
+>>> a.next()
+debug
+9
+>>> a.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+>>> import gen
+>>> a = Processo('a', [('rsrs', 1), ('wait', 1)])
+>>> b = Processo('b', [('rsrs', 2), ('wait', 3)])
+>>> gen.executar(gen.escalonador_fifo, [a, b])
+Processo a fica rsrs por 1 segundos
+Processo b fica rsrs por 2 segundos
+Processo a fica wait por 1 segundos
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 39, in executar
+    else:
+  File "gen.py", line 34, in passo
+    tipo = acao.pop(0)
+IndexError: pop from empty list
+>>> def escalonador_fifo(prontos):
+...     while prontos != []:
+...         print "Debug: %s" % prontos
+...         proximo = prontos.pop(0)
+...         tipo, tempo = proximo.acoes.pop(0)
+...         yield [proximo.nome, tipo, tempo]
+...         if proximo.acoes == []:
+...             yield [proximo.nome, tipo]
+...         else:
+...             prontos.append(proximo)
+... 
+>>> escalonador_fifo(Pclass Processo:
+  File "<stdin>", line 1
+    escalonador_fifo(Pclass Processo:
+                                   ^
+SyntaxError: invalid syntax
+>>>     def __init__(self, nome, acoes):
+  File "<stdin>", line 1
+    def __init__(self, nome, acoes):
+    ^
+IndentationError: unexpected indent
+>>>         self.nome = nome
+  File "<stdin>", line 1
+    self.nome = nome
+    ^
+IndentationError: unexpected indent
+>>>         self.acoes = acoes
+  File "<stdin>", line 1
+    self.acoes = acoes
+    ^
+IndentationError: unexpected indent
+>>>     def nova_acao(self, tipo, tempo):
+  File "<stdin>", line 1
+    def nova_acao(self, tipo, tempo):
+    ^
+IndentationError: unexpected indent
+>>>         self.acoes.append((tipo, tempo))
+  File "<stdin>", line 1
+    self.acoes.append((tipo, tempo))
+    ^
+IndentationError: unexpected indent
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...         self.nome = nome
+...         self.acoes = acoes
+...     def nova_acao(self, tipo, tempo):
+...         self.acoes.append((tipo, tempo))
+... 
+>>> a = escalonador_fifo(Processo('a', ['ahm', 1]))
+>>> a.next()
+Debug: <__main__.Processo instance at 0xb75d348c>
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 4, in escalonador_fifo
+AttributeError: Processo instance has no attribute 'pop'
+>>> a = escalonador_fifo([Processo('a', ['ahm', 1])])
+>>> a.next()
+Debug: [<__main__.Processo instance at 0xb75d382c>]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 5, in escalonador_fifo
+ValueError: too many values to unpack
+>>> p = Processo('a', ['ahm', 1]   
+... )
+>>> p
+<__main__.Processo instance at 0xb75d366c>
+>>> p.acos
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: Processo instance has no attribute 'acos'
+>>> p.acoes
+['ahm', 1]
+>>> escalonador_fifo([Processo('a', [('ahm', 1)])])
+<generator object at 0xb75d328c>
+>>> a = escalonador_fifo([Processo('a', [('ahm', 1)])])
+>>> a.next()
+Debug: [<__main__.Processo instance at 0xb75d392c>]
+['a', 'ahm', 1]
+>>> a.next()
+['a', 'ahm']
+>>> a.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+>>> import gen
+>>> import gen
+>>> gen.e()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'e'
+>>> gen.e  
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'e'
+>>> gen.a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'a'
+>>> 
+scheduler-19.04.10 $ ls    
+gen.py  gen.pyc  gen.py~  hmm  teste.py  teste.py~
+scheduler-19.04.10 $ cat gen.py
+#def counter ():
+#    i = 0
+#    while i < maximum:
+#        yield i
+#        i += 1
+
+class Processo:
+    def __init__(self, nome, acoes):
+        self.nome = nome
+        self.acoes = acoes
+    def nova_acao(self, tipo, tempo):
+        self.acoes.append((tipo, tempo))
+
+def escalonador_fifo(prontos):
+    while prontos != []:
+        print "Debug: %s" % prontos
+        proximo = prontos.pop(0)
+        tipo, tempo = proximo.acoes.pop(0)
+        yield [proximo.nome, tipo, tempo]
+        if proximo.acoes == []:
+            yield [proximo.nome, 'fim']
+       else:
+            prontos.append(proximo)
+
+def passo(acao):
+    nome = acao.pop(0)
+    tipo = acao.pop(0)
+    if tipo == 'fim':
+        print 'amm'
+        print "Processo finalizado: %s" % nome
+        print 'err'
+    else:
+        tempo = acao.pop(0)
+        print "Processo %s fica %s por %s segundos" % (nome, tipo, tempo)
+
+def executar(escalonador, processos):
+    for acao in escalonador(processos):
+        passo(acao)
+
+
+a = Processo('a', [('ahm', 1), ('wait', 10)])
+b = Processo('b', [('ahm', 20), ('wait', 1)])
+
+def e() = executar(escalonador_fifo, [a, b])
+scheduler-19.04.10 $ python
+Python 2.5.5 (r255:77872, Feb  1 2010, 19:53:42) 
+[GCC 4.4.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import gen
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 22
+    else:
+        ^
+IndentationError: unindent does not match any outer indentation level
+>>> import gen
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 44
+    def e() = executar(escalonador_fifo, [a, b])
+            ^
+SyntaxError: invalid syntax
+>>> import gen
+>>> gen.e()
+Debug: [<gen.Processo instance at 0xb765fc8c>, <gen.Processo instance at 0xb765fcac>]
+Processo a fica ahm por 1 segundos
+Debug: [<gen.Processo instance at 0xb765fcac>, <gen.Processo instance at 0xb765fc8c>]
+Processo b fica ahm por 20 segundos
+Debug: [<gen.Processo instance at 0xb765fc8c>, <gen.Processo instance at 0xb765fcac>]
+Processo a fica wait por 10 segundos
+amm
+Processo finalizado: a
+err
+Debug: [<gen.Processo instance at 0xb765fcac>]
+Processo b fica wait por 1 segundos
+amm
+Processo finalizado: b
+err
+>>> gen.e()
+Debug: [<gen.Processo instance at 0xb765fc8c>, <gen.Processo instance at 0xb765fcac>]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 44, in e
+    
+  File "gen.py", line 37, in executar
+    
+  File "gen.py", line 18, in escalonador_fifo
+    yield [proximo.nome, tipo, tempo]
+IndexError: pop from empty list
+>>> import gen
+>>> gen.e()
+Debug: [<gen.Processo instance at 0xb765fc8c>, <gen.Processo instance at 0xb765fcac>]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 44, in e
+    
+  File "gen.py", line 37, in executar
+    
+  File "gen.py", line 18, in escalonador_fifo
+    yield [proximo.nome, tipo, tempo]
+IndexError: pop from empty list
+>>> import gen
+>>> import gen
+>>> gen.e()
+Debug: [<gen.Processo instance at 0xb765fc8c>, <gen.Processo instance at 0xb765fcac>]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 44, in e
+    
+  File "gen.py", line 37, in executar
+    
+  File "gen.py", line 18, in escalonador_fifo
+    yield [proximo.nome, tipo, tempo]
+IndexError: pop from empty list
+>>> import gen
+>>> gen.e()
+Debug: [<gen.Processo instance at 0xb765fc8c>, <gen.Processo instance at 0xb765fcac>]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 44, in e
+    def e(): executar(escalonador_fifo, [a, b])
+  File "gen.py", line 37, in executar
+    for acao in escalonador(processos):
+  File "gen.py", line 18, in escalonador_fifo
+    tipo, tempo = proximo.acoes.pop(0)
+IndexError: pop from empty list
+>>> 
+scheduler-19.04.10 $ python
+Python 2.5.5 (r255:77872, Feb  1 2010, 19:53:42) 
+[GCC 4.4.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import gen
+>>> import gen
+>>> gen.e()
+Debug: [<gen.Processo instance at 0xb7660c0c>, <gen.Processo instance at 0xb7660c2c>]
+Processo a fica ahm por 1 segundos
+Debug: [<gen.Processo instance at 0xb7660c2c>, <gen.Processo instance at 0xb7660c0c>]
+Processo b fica ahm por 20 segundos
+Debug: [<gen.Processo instance at 0xb7660c0c>, <gen.Processo instance at 0xb7660c2c>]
+Processo a fica wait por 10 segundos
+amm
+Processo finalizado: a
+err
+Debug: [<gen.Processo instance at 0xb7660c2c>]
+Processo b fica wait por 1 segundos
+amm
+Processo finalizado: b
+err
+>>> 
+scheduler-19.04.10 $ python
+Python 2.5.5 (r255:77872, Feb  1 2010, 19:53:42) 
+[GCC 4.4.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import gen
+>>> gen.e()
+Processo a fica ahm por 1 segundos
+Processo b fica ahm por 20 segundos
+Processo a fica wait por 10 segundos
+Processo finalizado: a
+Processo b fica wait por 1 segundos
+Processo finalizado: b
+>>> from heapq import heappush
+>>> from heapq import heappop as r
+>>> r
+<built-in function heappop>
+>>> from heapq import heappush as t, heappop as r
+>>> t
+<built-in function heappush>
+>>> from heapq import *                          
+>>> from gen import *
+>>> def q(): from gen import *
+...  
+<stdin>:1: SyntaxWarning: import * only allowed at module level
+>>> from gen import *
+>>> e()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 41, in e
+    
+  File "gen.py", line 34, in executar
+    tempo = acao.pop(0)
+  File "gen.py", line 17, in escalonador_fifo
+    while prontos:
+IndexError: pop from empty list
+>>> 
+scheduler-19.04.10 $ python
+Python 2.5.5 (r255:77872, Feb  1 2010, 19:53:42) 
+[GCC 4.4.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from gen import *
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 25
+    else
+       ^
+SyntaxError: invalid syntax
+>>> from gen import *
+>>> e()
+Processo a fica ahm por 1 segundos
+Processo b fica ahm por 20 segundos
+Processo a fica wait por 10 segundos
+Processo finalizado: a
+Processo b fica wait por 1 segundos
+Processo finalizado: b
+>>> if ! 1 == 2: print 'a'
+  File "<stdin>", line 1
+    if ! 1 == 2: print 'a'
+       ^
+SyntaxError: invalid syntax
+>>> if not 1 == 2: print 'a'
+... 
+a
+>>> if not 1 != 2: print 'a'
+... 
+>>> a = 0 < 1                
+>>> a
+True
+>>> def f(): 1
+...  
+>>> f()
+>>> f()
+>>> def f(): return 1
+... 
+>>> f()
+1
+>>> for a, b in [(1, 2), (3, 4)]: print a
+... 
+1
+3
+>>> [for (a - 4), b in [(5, 2), (10, 4)]]        
+  File "<stdin>", line 1
+    [for (a - 4), b in [(5, 2), (10, 4)]]
+       ^
+SyntaxError: invalid syntax
+>>> [(a - 4), b for a, b in [(5, 2), (10, 4)]]
+  File "<stdin>", line 1
+    [(a - 4), b for a, b in [(5, 2), (10, 4)]]
+                  ^
+SyntaxError: invalid syntax
+>>> [((a - 4), b) for (a, b) in [(5, 2), (10, 4)]]
+[(1, 2), (6, 4)]
+>>> [(a - 4), b for (a, b) in [(5, 2), (10, 4)]]
+  File "<stdin>", line 1
+    [(a - 4), b for (a, b) in [(5, 2), (10, 4)]]
+                  ^
+SyntaxError: invalid syntax
+>>> [((a - 4), b) for (a, b) in [(5, 2), (10, 4)]]
+[(1, 2), (6, 4)]
+>>> [((a - 4), b) for a, b in [(5, 2), (10, 4)]]
+[(1, 2), (6, 4)]
+>>> [((a - 4), b) for a, b in [(5, 2), (10, 4)]]
+[(1, 2), (6, 4)]
+>>> 
+scheduler-19.04.10 $ python
+Python 2.5.5 (r255:77872, Feb  1 2010, 19:53:42) 
+[GCC 4.4.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from gen import *
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 16
+    self.acoes.append('cpu', tempo))
+                                   ^
+SyntaxError: invalid syntax
+>>> from gen import *
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 44
+    else if tipo == 'e/s':
+          ^
+SyntaxError: invalid syntax
+>>> from gen import *
+>>> reload(gen)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'gen' is not defined
+>>> reload('gen')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: reload() argument must be module
+>>> reload(gen)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'gen' is not defined
+>>> import gen         
+>>> reload(gen)
+<module 'gen' from 'gen.pyc'>
+>>> reload(gen)
+<module 'gen' from 'gen.pyc'>
+>>> gen = reload(gen)
+>>> gen.e()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 67, in e
+    def e(): executar(escalonador_fifo, [a, b])
+  File "gen.py", line 60, in executar
+    for acao in escalonador(processos):
+  File "gen.py", line 32, in escalonador_fifo
+    while alguem_pronto(espera, tempo):
+  File "gen.py", line 24, in alguem_pronto
+    return false
+NameError: global name 'false' is not defined
+>>> gen.e()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 67, in e
+    def e(): executar(escalonador_fifo, [a, b])
+  File "gen.py", line 60, in executar
+    for acao in escalonador(processos):
+  File "gen.py", line 32, in escalonador_fifo
+    while alguem_pronto(espera, tempo):
+  File "gen.py", line 24, in alguem_pronto
+    return false
+NameError: global name 'false' is not defined
+>>> reload(gen)
+<module 'gen' from 'gen.pyc'>
+>>> gen = reload(gen)
+>>> gen.e()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 67, in e
+    def e(): executar(escalonador_fifo, [a, b])
+  File "gen.py", line 60, in executar
+    for acao in escalonador(processos):
+  File "gen.py", line 32, in escalonador_fifo
+    while alguem_pronto(espera, tempo):
+  File "gen.py", line 24, in alguem_pronto
+    return false
+NameError: global name 'false' is not defined
+>>> gen
+<module 'gen' from 'gen.pyc'>
+>>> gen = reload(gen)
+>>> gen.e()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 67, in e
+    def e(): executar(escalonador_fifo, [a, b])
+  File "gen.py", line 60, in executar
+    for acao in escalonador(processos):
+  File "gen.py", line 32, in escalonador_fifo
+    while alguem_pronto(espera, tempo):
+  File "gen.py", line 24, in alguem_pronto
+    return false
+NameError: global name 'false' is not defined
+>>> import gen; reload(gen); from gen import *
+<module 'gen' from 'gen.py'>
+>>> gen.e()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "gen.py", line 67, in e
+    def e(): executar(escalonador_fifo, [a, b])
+  File "gen.py", line 60, in executar
+    for acao in escalonador(processos):
+  File "gen.py", line 37, in escalonador_fifo
+    yield [proximo.nome, tipo, tempo]
+NameError: global name 'proximo' is not defined
+>>> { 'e/s': 'dorme' }
+{'e/s': 'dorme'}
+>>> { 'e/s': 'dorme' }['e/s']
+'dorme'
+>>> { 'e/s': 'dorme'; 'cpu': 'executa' }['e/s']
+  File "<stdin>", line 1
+    { 'e/s': 'dorme'; 'cpu': 'executa' }['e/s']
+                    ^
+SyntaxError: invalid syntax
+>>> { 'e/s': 'dorme', 'cpu': 'executa' }['e/s']
+'dorme'
+>>> sys.stdin.readlines()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'sys' is not defined
+>>> sys.stdin.readlines  
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'sys' is not defined
+>>> import sys         
+>>> sys.stdin.readlines
+<built-in method readlines of file object at 0xb75d3020>
+>>> sys.stdin.readlines()
+1
+2
+['1\n', '2\n']
+>>> sys.stdin.readlines()
+[]
+>>> "a b".split
+<built-in method split of str object at 0xb759ba20>
+>>> "a b".split()
+['a', 'b']
+>>> {}
+{}
+>>> {}.class
+  File "<stdin>", line 1
+    {}.class
+           ^
+SyntaxError: invalid syntax
+>>> {}.__class__
+<type 'dict'>
+>>> [a for a in {'a': 1, 'b': 2 }]
+['a', 'b']
+>>> [a for a in {'a': 1, 'a': 2 }]
+['a']
+>>> [a for a in {'a': 1, 'b': 2 }]
+['a', 'b']
+>>> [a, b for a, b in {'a': 1, 'b': 2 }]
+  File "<stdin>", line 1
+    [a, b for a, b in {'a': 1, 'b': 2 }]
+            ^
+SyntaxError: invalid syntax
+>>> [(a, b) for a, b in {'a': 1, 'b': 2 }]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: need more than 1 value to unpack
+>>> [(a, b) for (a, b) in {'a': 1, 'b': 2 }]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: need more than 1 value to unpack
+>>> def ler_processo():
+...     tabela = {}
+...     processos =     []
+...     for linha in sys.stdin.readlines():
+...         palavras = linha.split()
+...         if len(palavras) < 3:
+...             print 'Entrada invalida: %s' % linha
+...             continue
+... 
+>>>         nome, tipo, tempo = palavras
+  File "<stdin>", line 1
+    nome, tipo, tempo = palavras
+    ^
+IndentationError: unexpected indent
+>>>     tabela[nome].append(tipo, tempo)
+  File "<stdin>", line 1
+    tabela[nome].append(tipo, tempo)
+    ^
+IndentationError: unexpected indent
+>>> def ler_processo():
+...     tabela = {}
+...     processos =     []
+...     for linha in sys.stdin.readlines():
+...         palavras = linha.split()
+...         if len(palavras) < 3:
+...             print 'Entrada invalida: %s' % linha
+...             continue
+...         nome, tipo, tempo = palavras
+...         tabela[nome].append(tipo, tempo)
+...     return tabela
+... 
+>>> ler_processo()
+a e/s 1
+b cpu 2
+a cpu 1
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 10, in ler_processo
+KeyError: 'a'
+>>> 1 if 1 == 1    
+  File "<stdin>", line 1
+    1 if 1 == 1
+              ^
+SyntaxError: invalid syntax
+>>> def ler_processo():
+...     tabela = {}
+...     processos =     []
+...     for linha in sys.stdin.readlines():
+...         palavras = linha.split()
+...         if len(palavras) < 3:
+...             print 'Entrada invalida: %s' % linha
+...             continue
+...         nome, tipo, tempo = palavras
+...         if not tabela[nome]:
+...             tabela[nome] = []
+...         tabela[nome].append(tipo, tempo)
+...     return tabela
+... 
+>>> ler_processo()
+a e/s 1
+b cpu 2
+a cpu 1
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 10, in ler_processo
+KeyError: 'a'
+>>> {}
+{}
+>>> {}[2]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 2
+>>> 2 in {}
+False
+>>> not 2 in {}
+True
+>>> def ler_processo():
+...     tabela = {}
+...     processos =     []
+...     for linha in sys.stdin.readlines():
+...         palavras = linha.split()
+...         if len(palavras) < 3:
+...             print 'Entrada invalida: %s' % linha
+...             continue
+...         nome, tipo, tempo = palavras
+...         if not nome in tabela:
+...             tabela[nome] = []
+...         tabela[nome].append(tipo, tempo)
+...     return tabela
+... 
+>>> let_processo()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'let_processo' is not defined
+>>> ler_processo()
+a e/s 1
+b cpu 2
+a cpu 1
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 12, in ler_processo
+TypeError: append() takes exactly one argument (2 given)
+>>> def ler_processo():
+...     tabela = {}
+...     processos =     []
+...     for linha in sys.stdin.readlines():
+...         palavras = linha.split()
+...         if len(palavras) < 3:
+...             print 'Entrada invalida: %s' % linha
+...             continue
+...         nome, tipo, tempo = palavras
+...         if not nome in tabela:
+...             tabela[nome] = []
+...         tabela[nome].append((tipo, tempo))
+...     return tabela
+... 
+>>> ler_processo()
+a e/s 1
+b cpu 2
+a cpu 1
+{'a': [('e/s', '1'), ('cpu', '1')], 'b': [('cpu', '2')]}
+>>> q = {'a': [('e/s', '1'), ('cpu', '1')], 'b': [('cpu', '2')]}
+>>> for i in q: print i
+... 
+a
+b
+>>> for i in ler_processo(): print i
+... 
+b cpu 2
+a cpu 1
+a e/s 1
+
+Entrada invalida: 
+
+a
+b
+>>> class Processo:
+...     def __init__(self, nome, acoes):
+...     self.nome = nome
+...         self.acoes = acoes
+...     def nova_espera(self, tempo):
+...         self.acoes.append(('e/s', tempo))
+...     def novo_processamento(self, tempo):
+...     self.acoes.append(('cpu', tempo))
+... 
+>>> 
+>>> def ler_processos():
+...     tabela = {}
+...     processos = []
+...     for linha in sys.stdin.readlines():
+...         palavras = linha.split()
+...         if len(palavras) < 3:
+...             print 'Entrada invalida: %s' % linha
+...             continue
+...         nome, tipo, tempo = palavras
+...         if not nome in tabela:
+...             tabela[nome] = []
+...         tabela[nome].append((tipo, tempo))
+...     for nome in tabela:
+...         processos.append(Processo(nome, tabela[nome]))
+...     return processos
+... 
+>>> ler_processos()
+^CTraceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 4, in ler_processos
+KeyboardInterrupt
+>>> q = ler_processos()
+a e/s 1
+b cpu 1
+a cpu 10
+c cpu 4
+>>> q
+[<__main__.Processo instance at 0xb759e9ec>, <__main__.Processo instance at 0xb759e24c>, <__main__.Processo instance at 0xb75a3ccc>]
+>>> q[0]
+<__main__.Processo instance at 0xb759e9ec>
+>>> q[0].nome
+'a'
+>>> q[0].acoes
+[('e/s', '1'), ('cpu', '10')]
+>>> q[1].acoes
+[('cpu', '4')]
+>>> q[1].nome 
+'c'
+>>> def ler_processos():
+...     tabela = {}
+...     processos = []
+...     for linha in sys.stdin.readlines():
+...     palavras = linha.split()
+...     if len(palavras) < 3:
+...             print 'Entrada invalida: %s' % linha
+...             continue
+...     nome, tipo, tempo = palavras
+...     if not nome in tabela:
+...             tabela[nome] = []
+...     tabela[nome].append((tipo, tempo))
+...     for nome in tabela:
+...     processos.append(Processo(nome, tabela[nome]))
+...     return sorted(processos)
+... 
+>>> q = ler_processos()
+ e/s 1
+b cpu 1
+a cpu 10
+c cpu 4
+>>> q[0].nome
+'c'
+>>> q[1].nome
+'a'
+>>> q[2].nome
+'b'
+>>> 
+scheduler-19.04.10 $ cat /home/dark/git/
+blob/      hydra-mud/ my-tools/  q/         rs         rstalk/    ruby/      x-web/     
+scheduler-19.04.10 $ cat /home/dark/git/rstalk/.git
+.git/       .gitignore  
+scheduler-19.04.10 $ cat /home/dark/git/rstalk/.git
+.git/       .gitignore  
+scheduler-19.04.10 $ cat /home/dark/git/rstalk/.gitignore 
+*~
+.*.swp
+.#*
+#*#
+
