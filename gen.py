@@ -1,9 +1,3 @@
-#def counter ():
-#    i = 0
-#    while i < maximum:
-#        yield i
-#        i += 1
-
 class Processo:
     def __init__(self, nome, acoes):
         self.nome = nome
@@ -13,7 +7,7 @@ class Processo:
 
 def escalonador_fifo(prontos):
     while prontos != []:
-        print "Debug: %s" % prontos
+        #print "Debug: %s" % prontos
         proximo = prontos.pop(0)
         tipo, tempo = proximo.acoes.pop(0)
         yield [proximo.nome, tipo, tempo]
@@ -26,9 +20,9 @@ def passo(acao):
     nome = acao.pop(0)
     tipo = acao.pop(0)
     if tipo == 'fim':
-        print 'amm'
+        #print 'amm'
         print "Processo finalizado: %s" % nome
-        print 'err'
+        #print 'err'
     else:
         tempo = acao.pop(0)
         print "Processo %s fica %s por %s segundos" % (nome, tipo, tempo)
