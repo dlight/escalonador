@@ -12,7 +12,7 @@ def main():
     #vbox = gtk.VBox(False, 0)
     #window.add(vbox)
 
-    button = gtk.Button("Quit")
+    button = gtk.Button("Algo")
     w.add(button)
     button.show()
 
