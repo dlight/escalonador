@@ -9,8 +9,8 @@ def main():
     w.set_name ("Test Input")
     w.connect("destroy", lambda x: gtk.main_quit())
 
-    #vbox = gtk.VBox(False, 0)
-    #window.add(vbox)
+    vbox = gtk.VBox(False, 0)
+    window.add(vbox)
 
     button = gtk.Button("Algo")
     w.add(button)

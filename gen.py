@@ -4,12 +4,17 @@ class Processo:
         self.acoes = acoes
     def nova_acao(self, tipo, tempo):
         self.acoes.append((tipo, tempo))
+    def proxima_acao(self):
+        self.acoes.pop(0)
+
+def proximo(
 
 def escalonador_fifo(prontos):
-    while prontos != []:
-        #print "Debug: %s" % prontos
+    espera = []
+    while prontos:
+        
         proximo = prontos.pop(0)
-        tipo, tempo = proximo.acoes.pop(0)
+        tipo, tempo = proximo.proxima_acao()
         yield [proximo.nome, tipo, tempo]
         if proximo.acoes == []:
             yield [proximo.nome, 'fim']
