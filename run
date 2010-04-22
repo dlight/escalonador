@@ -1,0 +1,7 @@
+#!/bin/bash
+
+python desenho.py &
+
+pid=$!
+read q;
+kill -9 $pid

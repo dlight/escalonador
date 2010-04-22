@@ -1,11 +1,11 @@
 import threading
-import base
+import base, gen
 import gtk, gobject, cairo
 import time
 
 gtk.gdk.threads_init()
 
-class Secret():
+class Secret:
     q = 0
     def s(self, x):
         self.q = x
@@ -24,30 +24,51 @@ class Thr(threading.Thread):
         self.data.s(0)
         print "Teste.."
         while not self.stopthread.isSet():
+            dt = 0.01 # segundos
             #print "AAAa, ", self.data.r()
 
             gtk.gdk.threads_enter()
 
-            self.data.s(self.data.r() + 0.0006)
+            self.data.s(self.data.r() + dt)
             self.plot.queue_draw()
 
             gtk.gdk.threads_leave()
-            time.sleep(0.01)
+            time.sleep(dt)
 	
     def stop(self):
         self.stopthread.set()
+
+class Line:
+    def __init__(self, h, begin, tam, cor):
+        self.altura = h
+        self.comeco = begin
+        self.tamanho = tam
+        self.r = cor[0]
+        self.g = cor[1]
+        self.b = cor[2]
+
+cores = [(0.0, 0.0, 0.8),
+   (0.0, 0.8, 0.0),
+   (0.8, 0.0, 0.0),
+   (0.8, 0.0, 0.8),
+   (0.0, 0.8, 0.8)]
 
 class Plot(base.Tela):
     def __init__(self, shared):
         base.Tela.__init__(self)
         self.data = shared
+        self.tacc = 0.0
+        self.lines = []
 
-    def draw_seg(self, cr, begin, to, h, r, g, b):
+    def draw_seg(self, cr, line):
         cr.set_line_width(0.003)
-        cr.set_source_rgb(r, g, b)
-        cr.move_to(0.01 + begin, h)
-        cr.line_to(0.01 + to + begin, h)
+        cr.set_source_rgb(line.r, line.g, line.b)
+        cr.move_to(line.comeco, line.altura)
+        cr.line_to(line.comeco + line.tamanho, line.altura)
         cr.stroke()
+
+    def t(self):
+        return self.data.r()
 
     def draw(self, cr, width, height):
         #print "Hmmm, ", self.data.r()
@@ -59,11 +80,42 @@ class Plot(base.Tela):
         cr.translate(0, 0)
         cr.scale(width / 1.0, height / 1.0)
 
-        if (self.data.r() < 0.2):
-            self.draw_seg(cr, 0, self.data.r(), 1 / 3.0, 0, 0, 0.8)
-        else:
-            self.draw_seg(cr, 0, 0.2, 1 / 3.0, 0, 0, 0.8)
-            self.draw_seg(cr, 0.2, self.data.r() - 0.2, 1 / 5.0, 0.8, 0, 0)
+        cor = (0.0, 0.0, 0.8)
+
+        if base.r.acoes:
+            p = base.r.acoes[0]
+            tempo, nome = p
+
+            ordem = base.r.ordem[nome]
+
+            global cores
+            cor = cores[int(ordem)]
+
+            q = (ordem + 1) / (base.r.num + 1)
+
+            t0 = self.tacc / base.r.total
+            dt = (self.t() - self.tacc) / base.r.total
+
+            print dt
+
+            #print nome, dt
+
+            line = Line(q, t0, dt, cor)
+            if self.t() < tempo + self.tacc:
+                self.draw_seg(cr, line)
+            else:
+                base.r.acoes.pop(0)
+                self.lines.append(line)
+                self.tacc += tempo
+
+        for line in self.lines:
+            self.draw_seg(cr, line)
+
+        #if (self.data.r() < 0.2):
+        #    self.draw_seg(cr, 0, self.data.r(), 1 / 3.0, 0, 0, 0.8)
+        #else:
+        #    self.draw_seg(cr, 0, 0.2, 1 / 3.0, 0, 0, 0.8)
+        #    self.draw_seg(cr, 0.2, self.data.r() - 0.2, 1 / 5.0, 0.8, 0, 0)
 
 s = Secret()
 

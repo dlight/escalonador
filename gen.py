@@ -61,7 +61,7 @@ def escalonador_fifo(prontos):
             espera.dormir(tempo_a_dormir, proximo)
             yield ['dormiu', proximo.nome]
 
-def passo(acao):
+def passo(acoes, acao):
     tipo, nome = acao[:2]
     if tipo == 'terminou':
         print "%s terminou." % nome
@@ -71,16 +71,46 @@ def passo(acao):
         print "%s dormiu." % nome
     elif tipo == 'exec':
         tempo = acao[2]
+        acoes.append((tempo, nome))
         print "%s executa por %ss." %(nome, tempo)
     else:
         raise Exception("Acao desconhecida?")
 
+    return acoes
+
 def executar(escalonador, processos):
+    acoes = []
     for acao in escalonador(processos):
-        passo(acao)
+        acoes = passo(acoes, acao)
+    return acoes
 
+def total(l):
+    return reduce(lambda x, y: x + y[0], l, 0)
 
-a = Processo('a', [1, 10, 3])
-b = Processo('b', [20, 1, 5, 2, 3, 5, 6])
+def make_dict(l):
+    i = 0.0
+    d = {}
+    for p in l:
+        e = p[1]
+        if not e in d:
+            d[e] = i
+            i += 1
 
-def e(): executar(escalonador_fifo, [a, b])
+    return d
+#a = Processo('a', [1.0, 10.0, 3.0])
+#b = Processo('b', [20.0, 1.0, 5.0, 2.0, 3.0, 5.0, 6.0])
+
+a = Processo('a', [0.5, 0.4, 0.1, 0.3, 0.4])
+b = Processo('b', [0.2, 0.1, 0.3, 0.7, 0.3])
+c = Processo('c', [0.7, 1.0, 0.2, 0.7, 0.3])
+
+class Resultado:
+    def __init__(self, acoes):
+        self.acoes = acoes
+        self.total = total(acoes)
+        self.ordem = make_dict(acoes)
+        self.num = len(self.ordem)
+
+def e():
+    r = Resultado(executar(escalonador_fifo, [a, b, c]))
+    return r
