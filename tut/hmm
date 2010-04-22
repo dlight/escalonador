@@ -3,6 +3,7 @@ pygtk2-2.10.1-12.el5
 ~ $ rpm -q python
 python-2.4.3-21.el5
 
+http://aruiz.typepad.com/siliconisland/2006/04/threads_on_pygt.html
 
 
 http://www.pygtk.org/pygtk2tutorial/
@@ -10,3 +11,24 @@ http://www.pygtk.org/pygtk2tutorial/ch-DrawingArea.html
 http://stackoverflow.com/questions/326300/python-best-library-for-drawing
 
 http://www.tortall.net/mu/wiki/PyGTKCairoTutorial ! !!
+
+http://zetcode.com/tutorials/gtktutorial/gtklayoutmanagement/
+
+
+http://www.pygtk.org/docs/pygtk/class-gtkalignment.html
+http://www.mail-archive.com/pygtk@daa.com.au/msg15769.html
+http://www.pygtk.org/docs/pygtk/class-gtkwidget.html
+http://library.gnome.org/devel/pygtk/stable/
+
+http://docs.python.org/library/threading.html
+http://stackoverflow.com/questions/576169/python-super
+
+http://faq.pygtk.org/index.py?req=index
+
+
+http://www.pygtk.org/pygtk2tutorial/sec-DetailsOfBoxes.html
+http://www.pygtk.org/pygtk2tutorial/examples/progressbar.py
+http://www.pygtk.org/pygtk2tutorial/ch-PackingWidgets.html#sec-TheoryOfPackingBoxes
+
+
+http://fuhm.net/super-harmful/

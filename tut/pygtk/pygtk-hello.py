@@ -10,10 +10,11 @@ def main():
     w.connect("destroy", lambda x: gtk.main_quit())
 
     vbox = gtk.VBox(False, 0)
-    window.add(vbox)
+    w.add(vbox)
+    vbox.show()
 
     button = gtk.Button("Algo")
-    w.add(button)
+    vbox.add(button)
     button.show()
 
     w.show()
