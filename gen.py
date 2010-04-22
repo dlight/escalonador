@@ -39,7 +39,7 @@ def escalonador_fifo(prontos):
         if not prontos:
             tempo_ocioso = espera.tempo_a_acordar()
             pronto = espera.acordar()
-            prontos.append(pronto)            
+            prontos.append(pronto)
             espera.tick(tempo_ocioso)
             continue
 
