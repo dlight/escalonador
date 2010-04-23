@@ -80,7 +80,9 @@ def passo(acoes, acao):
 
 def executar(escalonador, processos):
     acoes = []
+    print '---------------------------------------'
     for acao in escalonador(processos):
+        #print acao
         acoes = passo(acoes, acao)
     return acoes
 
@@ -102,15 +104,21 @@ def make_dict(l):
 
 a = Processo('a', [0.5, 0.4, 0.1, 0.3, 0.4])
 b = Processo('b', [0.2, 0.1, 0.3, 0.7, 0.3])
-c = Processo('c', [0.7, 1.0, 0.2, 0.7, 0.3])
+c = Processo('c', [0.7, 1.0, 0.2])
+d = Processo('d', [0.7, 1.0, 0.2])
+g = Processo('e', [0.7, 1.0, 0.2])
 
 class Resultado:
     def __init__(self, acoes):
+        #print acoes
         self.acoes = acoes
         self.total = total(acoes)
         self.ordem = make_dict(acoes)
         self.num = len(self.ordem)
 
-def e():
-    r = Resultado(executar(escalonador_fifo, [a, b, c]))
-    return r
+def f(l):
+    return Resultado(executar(escalonador_fifo, l))
+
+q = [a, b, c, d, g]
+
+def e(): f(q)

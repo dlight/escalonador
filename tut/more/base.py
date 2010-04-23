@@ -9,7 +9,9 @@ sys.path.insert(0, '')
 
 import gen
 
-r = gen.e()
+import os, signal
+
+import config
 
 class Tela(gtk.DrawingArea):
 
@@ -31,9 +33,16 @@ class Tela(gtk.DrawingArea):
     def size_request(self):
         (640, 480)
 
-def main(tela, quit):
+def main(tela, hmm):
+    global x
+    x = hmm
+
+    def quit(x):
+        gtk.main_quit()
+        os.kill(os.getpid(), signal.SIGKILL)
+
     janela = gtk.Window()
-    janela.set_name ("Test Input")
+    janela.set_title("Escalonador")
     janela.connect("destroy", quit)
 
     vbox = gtk.VBox(False, 5)
@@ -41,16 +50,15 @@ def main(tela, quit):
     vbox.show()
     janela.add(vbox)
 
-    botao = gtk.Button("Sair")
-    botao.connect_object("clicked", quit, janela)
-    botao.show()
-    #vbox.add(botao)
-
     tela.show()
     tela.size_request()
 
     align = gtk.Alignment(1, 0.5, 0, 0)
     align.set_padding(0, 3, 3, 3)
+
+    botao = gtk.Button("Config")
+    botao.connect_object("clicked", config.criar_config, janela)
+    botao.show()
 
     align.add(botao)
     align.show()
@@ -68,7 +76,7 @@ def main(tela, quit):
     gtk.main()
 
 if __name__ == "__main__":
-    main(Tela(), gtk.main_quit)
+    main(Tela(), lambda x: x)
 
 #    vbox.pack_start(button, True, True, 0)
 #    vbox.pack_start(button2, True, True, 0)
