@@ -33,8 +33,9 @@ class Fila_de_espera:
         self.fila = [(tempo - tempo_a_subtrair, nome) for (tempo, nome) in self.fila]
 
 
-def escalonador_fifo(prontos):
+def escalonador_fifo(prontos, overhead):
     espera = Fila_de_espera()
+
     while prontos or espera.fila:
         if not prontos:
             tempo_ocioso = espera.tempo_a_acordar()
@@ -46,6 +47,8 @@ def escalonador_fifo(prontos):
         proximo = prontos.pop(0)
         tempo_executando = proximo.proxima_acao()
 
+        if overhead:
+            yield ['exec', '0~so', overhead]
         yield ['exec', proximo.nome, tempo_executando]
 
         for pronto in espera.despertador(tempo_executando):
@@ -78,10 +81,10 @@ def passo(acoes, acao):
 
     return acoes
 
-def executar(escalonador, processos):
+def executar(escalonador, processos, overhead):
     acoes = []
     print '---------------------------------------'
-    for acao in escalonador(processos):
+    for acao in escalonador(processos, overhead):
         #print acao
         acoes = passo(acoes, acao)
     return acoes
@@ -116,8 +119,8 @@ class Resultado:
         self.ordem = make_dict(acoes)
         self.num = len(self.ordem)
 
-def f(l):
-    return Resultado(executar(escalonador_fifo, l))
+def f(l, o):
+    return Resultado(executar(escalonador_fifo, l, o))
 
 q = [a, b, c, d, g]
 

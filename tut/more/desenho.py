@@ -7,29 +7,6 @@ import config
 
 gtk.gdk.threads_init()
 
-class Thr(threading.Thread):
-    stopthread = threading.Event()
-
-    def __init__(self, plot):
-        threading.Thread.__init__(self)
-        self.plot = plot
-
-    def run(self):
-        print "Teste.."
-        while not self.stopthread.isSet():
-            dt = 0.01 # segundos
-            #print "AAAa, ", self.data.r()
-
-            gtk.gdk.threads_enter()
-
-            self.plot.queue_draw()
-
-            gtk.gdk.threads_leave()
-            time.sleep(dt)
-	
-    def stop(self):
-        self.stopthread.set()
-
 class Line:
     def __init__(self, h, begin, tam, cor):
         self.altura = h
@@ -49,7 +26,7 @@ cores = [(0.8, 0.0, 0.8),
 class Plot(base.Tela):
     def __init__(self):
         base.Tela.__init__(self)
-        self.set_r(gen.q)
+        self.set_r(gen.q, 0.5)
 
     def draw_seg(self, cr, line):
         cr.set_line_width(0.003)
@@ -58,8 +35,8 @@ class Plot(base.Tela):
         cr.line_to(line.comeco + line.tamanho, line.altura)
         cr.stroke()
 
-    def set_r(self, l):
-            self.r = gen.f(l)
+    def set_r(self, l, o):
+            self.r = gen.f(l, o)
             self.ta = time.time()
             self.tacc = self.ta
             self.lines = []
@@ -110,15 +87,10 @@ class Plot(base.Tela):
 
 plot = Plot()
 
-fs = Thr(plot)
+def timeout():
+    plot.queue_draw()
+    return True
 
-fs.start()
-
-def main_quit(obj):
-	"""main_quit function, it stops the thread and the gtk's main loop"""
-
-	global fs
-	fs.stop()
-	gtk.main_quit()
+gobject.timeout_add(16, timeout)
 
 base.main(plot, plot.set_r)

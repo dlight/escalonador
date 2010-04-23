@@ -39,7 +39,6 @@ def main(tela, hmm):
 
     def quit(x):
         gtk.main_quit()
-        os.kill(os.getpid(), signal.SIGKILL)
 
     janela = gtk.Window()
     janela.set_title("Escalonador")

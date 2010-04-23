@@ -1,2 +1,2 @@
 #!/bin/sh
-exec python desenho.py
+python desenho.py
