@@ -8,8 +8,11 @@ def criar_config(q):
     window.connect("destroy", lambda x: x.destroy())
     window.set_title("Config")
 
-    s = 'Para cada processo, digite o tempo de cada acao ' + \
-            '(executar e esperar).'
+    s = 'Para cada processo, digite o tempo de cada\n' + \
+            'acao (executar e esperar), alternadamente.\n' + \
+            'Se o quantum nao for especificado, o\n' + \
+            'algoritmo usado sera FIFO; caso contrario,\n' + \
+            'Round Robin.'
 
     l = gtk.Label(str=s)
     l.set_line_wrap(True)
@@ -17,20 +20,13 @@ def criar_config(q):
 
     read = []
     do_overhead = [lambda x: x]
+    do_quantum = [lambda x: x]
     overhead = 0.0
-
-    def gerar():
-        def n_():
-            yield 'a'
-            yield 'b'
-            yield 'c'
-            yield 'd'
-            yield 'e'
-            yield 'f'
-        return n_
+    quantum = 0.0
 
     def vals(x):
-        c = ['a', 'b', 'c', 'd', 'e', 'f'].__iter__()
+        c = ['O Processo A', 'O Processo B', 'O Processo C',
+            'O Processo D', 'O Processo E', 'O Processo F'].__iter__()
         def eachf(q):
             return gen.Processo(c.next(), [float(i.group(0)) for i in
                     re.finditer('[0-9.]+', q())])
@@ -41,7 +37,12 @@ def criar_config(q):
         except:
             o = 0.0
 
-        base.x(a, o)
+        try:
+            q = float(do_quantum[0]())
+        except:
+            q = 0.0
+
+        base.x(a, o, q)
 
     def add_opt(s, proc):
         b = gtk.HBox(False, 5)
@@ -51,6 +52,8 @@ def criar_config(q):
         b.add(l)
         b.add(o)
         vbox.add(b)
+        if proc == 'q':
+            do_quantum[0] = o.get_text
         if not proc:
             read.append(o.get_text)
         else:
@@ -63,6 +66,8 @@ def criar_config(q):
     add_opt('Processo 5', 0)
 
     add_opt('Overhead', True)
+
+    add_opt('Quantum', 'q')
 
     hbox = gtk.HBox(False, 5)
     alig = gtk.Alignment(1, 0, 0, 0)

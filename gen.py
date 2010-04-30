@@ -11,6 +11,8 @@ class Processo:
         self.acoes[0]
     def proxima_acao(self):
         return self.acoes.pop(0)
+    def inserir_acao(self, acao):
+        self.acoes.insert(0, acao)
 
 class Fila_de_espera:
     fila = []
@@ -34,6 +36,7 @@ class Fila_de_espera:
 
 
 def escalonador_fifo(prontos, overhead):
+    print '* Iniciando FIFO'
     espera = Fila_de_espera()
 
     while prontos or espera.fila:
@@ -64,6 +67,57 @@ def escalonador_fifo(prontos, overhead):
             espera.dormir(tempo_a_dormir, proximo)
             yield ['dormiu', proximo.nome]
 
+def escalonador_rr(prontos, overhead, quantum):
+    print '* Iniciando Round Robin'
+
+    espera = Fila_de_espera()
+
+    while prontos or espera.fila:
+        #print 'prontos: ', prontos
+        #print 'espera:  ', espera.fila
+
+        if not prontos:
+            tempo_ocioso = espera.tempo_a_acordar()
+            yield ['nada', tempo_ocioso]
+            pronto = espera.acordar()
+            prontos.append(pronto)
+            espera.tick(tempo_ocioso)
+            continue
+
+        proximo = prontos.pop(0)
+        tempo_executando = proximo.proxima_acao()
+
+        chutado = False
+
+        if overhead:
+            yield ['exec', 'O Escalonador', overhead]
+            espera.tick(overhead)
+
+        if tempo_executando <= quantum:
+            yield ['exec', proximo.nome, tempo_executando]
+        else:
+            yield ['exec', proximo.nome, quantum]
+            yield ['chutado', proximo.nome]
+            chutado = True
+            proximo.inserir_acao(tempo_executando - quantum)
+            prontos.append(proximo)
+
+        for pronto in espera.despertador(tempo_executando):
+            prontos.append(pronto)
+            yield ['acordou', pronto.nome]
+
+        espera.tick(tempo_executando)
+
+        if chutado:
+            continue
+
+        if not proximo.acoes:
+            yield ['terminou', proximo.nome]
+        else:
+            tempo_a_dormir = proximo.proxima_acao()
+            espera.dormir(tempo_a_dormir, proximo)
+            yield ['dormiu', proximo.nome]
+
 def passo(acoes, acao):
     tipo, nome = acao[:2]
     if tipo == 'terminou':
@@ -72,6 +126,11 @@ def passo(acoes, acao):
         print "%s acordou." % nome
     elif tipo == 'dormiu':
         print "%s dormiu." % nome
+    elif tipo == 'chutado':
+        print "%s foi chutado." % nome
+    elif tipo == 'nada':
+        acoes.append((nome, 'Nada'))
+        print "Nada acontece por %ss" % nome
     elif tipo == 'exec':
         tempo = acao[2]
         acoes.append((tempo, nome))
@@ -81,12 +140,14 @@ def passo(acoes, acao):
 
     return acoes
 
-def executar(escalonador, processos, overhead):
+def executar(escalonador, processos, overhead, quantum):
     acoes = []
     print '---------------------------------------'
-    for acao in escalonador(processos, overhead):
+    for acao in escalonador(processos, overhead, quantum):
         #print acao
         acoes = passo(acoes, acao)
+    print '---------------------------------------'
+    print
     return acoes
 
 def total(l):
@@ -105,11 +166,11 @@ def make_dict(l):
 #a = Processo('a', [1.0, 10.0, 3.0])
 #b = Processo('b', [20.0, 1.0, 5.0, 2.0, 3.0, 5.0, 6.0])
 
-a = Processo('a', [0.5, 0.4, 0.1, 0.3, 0.4])
-b = Processo('b', [0.2, 0.1, 0.3, 0.7, 0.3])
-c = Processo('c', [0.7, 1.0, 0.2])
-d = Processo('d', [0.7, 1.0, 0.2])
-g = Processo('e', [0.7, 1.0, 0.2])
+a = Processo('O Processo A', [0.6, 0.4, 0.1, 0.3, 0.2])
+b = Processo('O Processo B', [0.2, 0.5, 1.0, 0.2, 0.1])
+c = Processo('O Processo C', [0.7, 1.0, 0.2])
+d = Processo('O Processo D', [0.7, 1.0, 0.2])
+g = Processo('O Processo E', [0.7, 1.0, 0.2])
 
 class Resultado:
     def __init__(self, acoes):
@@ -119,9 +180,14 @@ class Resultado:
         self.ordem = make_dict(acoes)
         self.num = len(self.ordem)
 
-def f(l, o):
-    return Resultado(executar(escalonador_fifo, l, o))
+def f(l, o, q):
+    if q:
+        esc = escalonador_rr
+    else:
+        esc = escalonador_fifo
 
-q = [a, b, c, d, g]
+    return Resultado(executar(esc, l, o, q))
 
-def e(): f(q)
+q = [a, b]
+
+def e(): f(q, 0.0)
