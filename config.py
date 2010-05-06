@@ -42,6 +42,8 @@ def criar_config(q):
         except:
             q = 0.0
 
+        print ',overhead quantum: %s %s' %(o, q)
+
         base.x(a, o, q)
 
     def add_opt(s, proc):
@@ -54,7 +56,7 @@ def criar_config(q):
         vbox.add(b)
         if proc == 'q':
             do_quantum[0] = o.get_text
-        if not proc:
+        elif not proc:
             read.append(o.get_text)
         else:
             do_overhead[0] = o.get_text

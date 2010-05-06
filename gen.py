@@ -35,7 +35,7 @@ class Fila_de_espera:
         self.fila = [(tempo - tempo_a_subtrair, nome) for (tempo, nome) in self.fila]
 
 
-def escalonador_fifo(prontos, overhead):
+def escalonador_fifo(prontos, overhead, qqqqq):
     print '* Iniciando FIFO'
     espera = Fila_de_espera()
 
@@ -51,7 +51,7 @@ def escalonador_fifo(prontos, overhead):
         tempo_executando = proximo.proxima_acao()
 
         if overhead:
-            yield ['exec', '0~so', overhead]
+            yield ['exec', 'O Escalonador', overhead]
         yield ['exec', proximo.nome, tempo_executando]
 
         for pronto in espera.despertador(tempo_executando):
@@ -190,4 +190,4 @@ def f(l, o, q):
 
 q = [a, b]
 
-def e(): f(q, 0.0)
+#def e(): f(q, 0.0)

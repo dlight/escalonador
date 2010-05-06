@@ -44,6 +44,7 @@ class Plot(base.Tela):
             cr.select_font_face("Helvetica")
             cr.set_font_size(0.02)
             cr.rel_move_to(0, 0.03)
+
             cr.show_text(time)
 
     def set_r(self, l, o, q):
