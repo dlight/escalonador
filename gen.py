@@ -4,9 +4,10 @@ class Processo:
     # ps: acoes de executar e dormir estao sempre alternadas
     # a primeira acao e' sempre uma execucao
 
-    def __init__(self, nome, acoes):
+    def __init__(self, nome, acoes, tempo):
         self.nome = nome
         self.acoes = acoes
+        self.tempo_de_chegada = tempo
     def ver_acao(self):
         self.acoes[0]
     def proxima_acao(self):
@@ -16,6 +17,11 @@ class Processo:
 
 class Fila_de_espera:
     fila = []
+
+    def __init__(self, f):
+        heapify(f)
+        print f
+        self.fila = heapify(f)
 
     def dormir(self, tempo, nome):
         heappush(self.fila, (tempo, nome))
@@ -35,9 +41,9 @@ class Fila_de_espera:
         self.fila = [(tempo - tempo_a_subtrair, nome) for (tempo, nome) in self.fila]
 
 
-def escalonador_fifo(prontos, overhead, qqqqq):
+def escalonador_fifo(espera, overhead, qqqqq):
     print '* Iniciando FIFO'
-    espera = Fila_de_espera()
+    prontos = []
 
     while prontos or espera.fila:
         if not prontos:
@@ -67,10 +73,10 @@ def escalonador_fifo(prontos, overhead, qqqqq):
             espera.dormir(tempo_a_dormir, proximo)
             yield ['dormiu', proximo.nome]
 
-def escalonador_rr(prontos, overhead, quantum):
+def escalonador_rr(espera, overhead, quantum):
     print '* Iniciando Round Robin'
 
-    espera = Fila_de_espera()
+    prontos = []
 
     while prontos or espera.fila:
         #print 'prontos: ', prontos
@@ -140,10 +146,15 @@ def passo(acoes, acao):
 
     return acoes
 
+def ee(processos):
+    return [(p.tempo_de_chegada, p) for p in processos]
+
 def executar(escalonador, processos, overhead, quantum):
     acoes = []
+    espera = Fila_de_espera(ee(processos))
+
     print '---------------------------------------'
-    for acao in escalonador(processos, overhead, quantum):
+    for acao in escalonador(espera, overhead, quantum):
         #print acao
         acoes = passo(acoes, acao)
     print '---------------------------------------'
@@ -166,11 +177,11 @@ def make_dict(l):
 #a = Processo('a', [1.0, 10.0, 3.0])
 #b = Processo('b', [20.0, 1.0, 5.0, 2.0, 3.0, 5.0, 6.0])
 
-a = Processo('O Processo A', [0.6, 0.4, 0.1, 0.3, 0.2])
-b = Processo('O Processo B', [0.2, 0.5, 1.0, 0.2, 0.1])
-c = Processo('O Processo C', [0.7, 1.0, 0.2])
-d = Processo('O Processo D', [0.7, 1.0, 0.2])
-g = Processo('O Processo E', [0.7, 1.0, 0.2])
+a = Processo('O Processo A', [1, 2, 1], 10)
+b = Processo('O Processo B', [1, 2, 1], 2)
+c = Processo('O Processo C', [0.7, 1.0, 0.2], 0.4)
+d = Processo('O Processo D', [0.7, 1.0, 0.2], 0.5)
+g = Processo('O Processo E', [0.7, 1.0, 0.2], 0.6)
 
 class Resultado:
     def __init__(self, acoes):
@@ -186,8 +197,8 @@ def f(l, o, q):
     else:
         esc = escalonador_fifo
 
-    return Resultado(executar(esc, l, o, q))
+    return Resultado(executar(esc, l, o ,q))
 
 q = [a, b]
 
-#def e(): f(q, 0.0)
+def e(): f(q, 0.5, 0.0)
